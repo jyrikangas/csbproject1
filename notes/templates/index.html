@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>notes</title>
+</head>
+<body>
+    <nav class="navbar">
+        <a class="navbar__link" href="/">Home</a>
+        <a class="navbar__link" href="/loginView/">login</a>
+        <a class="navbar__link" href="/register/">register</a>
+    </nav>
+<h1>notes</h1>
+<div>
+    <ul>
+        {% for user in users %}
+          <li>{{ user.username }}</li>
+        {% endfor %}
+    </ul>
+</div>
+<div>
+    <ul>
+        {% for note in notes %}
+          <li>{{ note }}</li>
+        {% endfor %}
+    </ul>
+</div>
+<div>
+    <form action="/add/" method="post">
+        {% csrf_token %} 
+        <input type="text" name="note">
+        <input type="submit" value="Add Note">
+    </form>
+</div>
+</body>
+</html>
+
