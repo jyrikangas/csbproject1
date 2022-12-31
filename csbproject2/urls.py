@@ -20,7 +20,10 @@ from notes import views
 urlpatterns = [
     path('', views.index, name='index'),
     path('loginView/', views.loginView, name='login'),
+    path('logoutView/', views.logoutView, name='logout'),
     path('register/', views.register, name='register'),
     path('add/', views.add, name='add'),
     path('admin/', admin.site.urls),
+    path('accounts/<str:username>', views.accountView, name='account'),
+    path('delete/<int:id>', views.deleteView, name='delete')
 ]
