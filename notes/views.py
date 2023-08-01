@@ -30,9 +30,36 @@ def register(request):
         username =request.POST.get("username")
         password = request.POST.get("password")
         ##call a function to check password strength, if not strong enough, return error
+        ##if not check_password_strength(password):
+        ##    return render(request, 'register.html', {"error": "password not strong enough"})
+        
         User.objects.create_user(username=username, password=password)
         return redirect('/loginView')
     return render(request, 'register.html', {"error": "register failed"})
+
+def check_password_strength(password):
+    # Check if password is at least 8 characters long
+    if len(password) < 8:
+        return False
+
+    # Check if password contains at least one uppercase letter
+    if not any(char.isupper() for char in password):
+        return False
+
+    # Check if password contains at least one lowercase letter
+    if not any(char.islower() for char in password):
+        return False
+
+    # Check if password contains at least one digit
+    if not any(char.isdigit() for char in password):
+        return False
+
+    # Check if password contains at least one special character
+    special_chars = "!@#$%^&*()-+"
+    if not any(char in special_chars for char in password):
+        return False
+
+    return True
 
 ##login_required
 def add(request):

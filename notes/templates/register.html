@@ -11,6 +11,9 @@
       <a class="navbar__link" href="/logoutView/">logout</a>
   </nav>
     <h1>Registration</h1>
+    {% if error %}
+      <p style="color: red;">{{ error }}</p>
+    {% endif %}
     <form action="/register/" method="post">
       <label for="username">Username:</label><br>
       <input type="text" id="username" name="username"><br>
