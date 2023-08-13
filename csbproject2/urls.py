@@ -25,5 +25,7 @@ urlpatterns = [
     path('add/', views.add, name='add'),
     path('admin/', admin.site.urls),
     path('accounts/<str:username>', views.accountView, name='account'),
-    path('delete/<int:id>', views.deleteView, name='delete')
+    ##path('accounts/<int:user_id>', views.accountView, name='account'),
+    path('delete/<int:id>', views.deleteView, name='delete'),
+    path('accounts/delete/<str:username>', views.AccountDeleteView, name='delete')
 ]

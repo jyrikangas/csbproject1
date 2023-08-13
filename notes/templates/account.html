@@ -2,7 +2,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>notes</title>
+<title>user</title>
 </head>
 <body>
     <nav class="navbar">
@@ -11,10 +11,11 @@
         <a class="navbar__link" href="/register/">register</a>
         <a class="navbar__link" href="/logoutView/">logout</a>
         {%if user%}
-        <a class="navbar__link" href="/accounts/{{user.username}}">logged in as {{ user.username }}</a>
+       <!-- <a class="navbar__link" href="/accounts/{{user.username}}">logged in as {{ user.username }}, click to go to your page</a> -->
+        <a class="navbar__link" href="/accounts/{{user.id}}">logged in as {{ user.username }}, click to go to your page</a>
         {%endif%}
     </nav>
-<h1>notes</h1>
+<h1>{{user.username}}'s notes</h1>
 
 <div>
     <ul>
@@ -39,6 +40,8 @@
         <input type="text" name="note">
         <input type="submit" value="Add Note">
     </form>
+</div>
+<div>
 </div>
 </body>
 </html>

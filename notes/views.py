@@ -4,6 +4,7 @@ from django.http import HttpResponse
 from notes.models import Note
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
+from django.utils.html import escape
 # Create your views here.
 
 
@@ -11,6 +12,7 @@ def index(request):
     users = User.objects.all() 
     notes = Note.objects.all()
     user = request.user
+    notes = Note.objects.filter(secret=False)
     return render(request, 'index.html', {"users": users, "notes": notes, "user": user})
 
 def loginView(request):
@@ -67,7 +69,9 @@ def add(request):
         return render(request, 'login.html', {'error': "add fail"})
     if request.method == "POST":
         note = request.POST.get('note')
-        Note.objects.create(user=request.user, note=note)
+        secret = bool(request.POST.get('secret'))
+        note = escape(note)
+        Note.objects.create(user=request.user, note=note, secret=secret)
         print(request.user)
         print(note)
         print(Note.objects.get(note=note))
@@ -77,15 +81,27 @@ def logoutView(request):
     logout(request)
     return redirect('/')
 
-##login_required
+
+##@login_required
 def accountView(request, username):
-    ##   if not request.user.is_authenticated:
-    ##   return render(request, 'login.html', {'error': "add fail"})
     pageowner = User.objects.get(username=username)
+    ##if request.user != pageowner:
+    ##    return redirect('/')
+
+    notes = Note.objects.filter(user=pageowner)
+    user=request.user
+    
+    return render(request, 'account.html', {"notes": notes, "user": user, "pageowner": pageowner})
+"""
+@login_required
+def accountView(request, user_id):
+    pageowner = User.objects.get(id=user_id)
+    if request.user != pageowner:
+        return redirect('home') # or any other page you want to redirect to
     notes = Note.objects.filter(user=pageowner)
     user=request.user
     return render(request, 'account.html', {"notes": notes, "user": user, "pageowner": pageowner})
-
+ """
 ##login_required
 def deleteView(request, id):
     ##   if not request.user.is_authenticated:
@@ -94,3 +110,10 @@ def deleteView(request, id):
     username=note.user.username
     note.delete()
     return redirect('/accounts/'+username)
+
+def AccountDeleteView(request, username):
+    if not request.user.is_authenticated:
+        return render(request, 'login.html', {'error': "You are not logged in"})
+    user = User.objects.get(username=username)
+    user.delete()
+    return redirect('/')
