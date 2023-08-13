@@ -72,9 +72,7 @@ def add(request):
         secret = bool(request.POST.get('secret'))
         ##note = escape(note)
         Note.objects.create(user=request.user, note=note, secret=secret)
-        print(request.user)
-        print(note)
-        print(Note.objects.get(note=note))
+
     return redirect('/')
 
 def logoutView(request):

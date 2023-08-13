@@ -13,7 +13,7 @@ This could be fixed by checking the strength of the users password during user c
 
 FLAW 2: AO3 Injection
 exact source link pinpointing flaw 2:
-https://github.com/jyrikangas/csbproject1/blob/548fea93df1ba4337da3857b3891824f8ca542eb/notes/views.py#L67
+https://github.com/jyrikangas/csbproject1/blob/7eb3ab01ef4aa28c5b7554d8688192afabcd758c/notes/views.py#L67
 description of flaw 2:
 The application does not sufficiently prevent user inputted data from tampering with the application. For example, it is possible to include javascript code in a note, and it will be executed. (Try for example <script> alert("asdf"); </script>). This could be used maliciously by an attacker.
 how to fix it:
