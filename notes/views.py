@@ -70,7 +70,7 @@ def add(request):
     if request.method == "POST":
         note = request.POST.get('note')
         secret = bool(request.POST.get('secret'))
-        note = escape(note)
+        ##note = escape(note)
         Note.objects.create(user=request.user, note=note, secret=secret)
         print(request.user)
         print(note)
