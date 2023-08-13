@@ -11,8 +11,8 @@
         <a class="navbar__link" href="/register/">register</a>
         <a class="navbar__link" href="/logoutView/">logout</a>
         {%if user%}
-       <!-- <a class="navbar__link" href="/accounts/{{user.username}}">logged in as {{ user.username }}, click to go to your page</a> -->
-        <a class="navbar__link" href="/accounts/{{user.id}}">logged in as {{ user.username }}, click to go to your page</a>
+        <a class="navbar__link" href="/accounts/{{user.username}}">logged in as {{ user.username }}, click to go to your page</a> 
+        <!-- <a class="navbar__link" href="/accounts/{{user.id}}">logged in as {{ user.username }}, click to go to your page</a> -->
         {%endif%}
     </nav>
 <h1>{{user.username}}'s notes</h1>

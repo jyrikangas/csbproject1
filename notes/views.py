@@ -100,10 +100,8 @@ def accountView(request, user_id):
     user=request.user
     return render(request, 'account.html', {"notes": notes, "user": user, "pageowner": pageowner})
  """
-##login_required
+
 def deleteView(request, id):
-    ##   if not request.user.is_authenticated:
-    ##   return render(request, 'login.html', {'error': "add fail"})
     note = Note.objects.get(id=id)
     username=note.user.username
     note.delete()
